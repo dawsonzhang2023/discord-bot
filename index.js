@@ -30,7 +30,7 @@ const openAiClient = new OpenAIApi( OpenAIConfig )
 discordClient.on('messageCreate' ,  async (message)=>{
     try {
         if( message.author.bot )return
-        // message.reply(`echo ${message.content}`)
+        message.reply(`echo ${message.content}`)
         let prompt =  message.content
         console.log( `received ${prompt}`)
         let gptReply = await  openAiClient.createCompletion({
