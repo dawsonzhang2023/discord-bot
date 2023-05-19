@@ -1,9 +1,9 @@
 // dotenv
 require("dotenv").config()
 
-console.log( process.env.KEY_API_TOKEN_RECORDS)
-console.log( process.env.CHAT_GPT_ORGID)
-console.log( process.env.KEY_CHAT_GPT_ORGID)
+//console.log( process.env.KEY_API_TOKEN_RECORDS)
+//console.log( process.env.CHAT_GPT_ORGID)
+//console.log( process.env.KEY_CHAT_GPT_ORGID)
 
 
 // authorize 2   https://discord.com/oauth2/authorize?client_id=1104811428281593897&scope=bot&permissions=1
