@@ -30,17 +30,21 @@ const openAiClient = new OpenAIApi( OpenAIConfig )
 discordClient.on('messageCreate' ,  async (message)=>{
     try {
         if( message.author.bot )return
-        message.reply(`echo ${message.content}`)
-        let prompt =  message.content
-        console.log( `received ${prompt}`)
-        let gptReply = await  openAiClient.createCompletion({
-            model:'davinci',
-            prompt: `ChatGPT is a friendly chatbot \n\ chatGpt : hello , how are you \n\ ${prompt}`,
-            temperature: 0.9,
-            max_tokens : 100,
-            stop:["ChatGPT"]
-        })
-        message.reply(`${gptReply.data.choices[0].text}`)
+        var mentionUsers =  message.mentions.users
+        for ( var [key , val ] of mentionUsers.entries() ){
+            if( key == '1104811428281593897'){
+                let prompt = message.content
+                let gptReply = await  openAiClient.createCompletion({
+                    model:'text-davinci-003',
+                    prompt: `${prompt}`,
+                    temperature: 0.9,
+                    max_tokens : 100,
+                    stop:["ChatGPT"]
+                })
+                message.reply(`${gptReply.data.choices[0].text}`)
+            }
+        }
+       //  console.log( message )
     } catch (error) {
         console.log(error)
     }
