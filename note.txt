@@ -1,0 +1,13 @@
+for ( var [key , val ] of mentionUsers.entries() ){
+            if( key == '1104811428281593897'){
+                let prompt = message.content
+                let gptReply = await  openAiClient.createCompletion({
+                    model:'gpt-3.5-turbo',
+                    prompt: `${prompt}`,
+                    temperature: 0.9,
+                    max_tokens : 100,
+                    stop:["ChatGPT"]
+                })
+                message.reply(`${gptReply.data.choices[0].text}`)
+            }
+        }
