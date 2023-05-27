@@ -19,7 +19,6 @@ const discordClient = new Client( { intents : [
 
 const { Configuration , OpenAIApi } = require('openai')
 const OpenAIConfig = new Configuration({ 
-        organization: process.env.OPENAI_ORG,
         apiKey : process.env.KEY_CHAT_GPT_ORGID
  })
 
@@ -31,22 +30,34 @@ discordClient.on('messageCreate' ,  async (message)=>{
     try {
         if( message.author.bot )return
         var mentionUsers =  message.mentions.users
-        for ( var [key , val ] of mentionUsers.entries() ){
-            if( key == '1104811428281593897'){
-                let prompt = message.content
-                let gptReply = await  openAiClient.createCompletion({
+        console.log(mentionUsers)
+        message.reply("this is a chat bot")
+       console.log( message.content )
+    } catch (error) {
+        console.log(error)
+    }
+})
+
+
+discordClient.on('interactionCreate' ,async (action)=>{
+    //console.log(action)
+    if( !action.isChatInputCommand ) return
+    if( action.commandName=='chat'){
+        //action.reply('chat with gpt')
+        const prompt = action.options.get('prompt').value
+        action.reply(`echo ${prompt}`)
+    }
+    if( action.commandName=='chatgpt'){
+        //action.reply('chat with gpt')
+        const prompt = action.options.get('prompt').value
+        let gptReply = await  openAiClient.createCompletion({
                     model:'text-davinci-003',
                     prompt: `${prompt}`,
                     temperature: 0.9,
-                    max_tokens : 100,
+                    max_tokens : 1000,
                     stop:["ChatGPT"]
-                })
-                message.reply(`${gptReply.data.choices[0].text}`)
-            }
-        }
-       //  console.log( message )
-    } catch (error) {
-        console.log(error)
+        })      
+        action.reply(`${gptReply.data.choices[0].text}`)
     }
 })
 
@@ -56,10 +67,6 @@ console.log("ChatGPT bot is Online")
 
 
 
-
-
-
- discordClient 
 
 
 
