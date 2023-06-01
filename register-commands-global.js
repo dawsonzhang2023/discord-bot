@@ -44,6 +44,66 @@ const commands = [
       },
     ],
   },
+  {
+    name: "w-tiktok-guide",
+    description: "Tiktok—文案和剧本—产品相关-教程式",
+    options: [
+      {
+        name: "keyword",
+        description: "用这些关键词提出问题",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+      {
+        name: "checkpoint",
+        description: "受众痛点",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+      {
+        name: "target",
+        description: "目标人群",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+      {
+        name: "product",
+        description: "让观众对我们的这个产品感兴趣",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+    ],
+  },
+  {
+    name: "w-ins-product",
+    description: "Instagram—文案—面向目标人群-产品相关",
+    options: [
+      {
+        name: "keyword",
+        description: "用这些关键词提出问题",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+      {
+        name: "checkpoint",
+        description: "受众痛点",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+      {
+        name: "target",
+        description: "目标人群",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+      {
+        name: "product",
+        description: "让观众对我们的这个产品感兴趣",
+        type: ApplicationCommandOptionType.String,
+        require: true,
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: 10 }).setToken(
