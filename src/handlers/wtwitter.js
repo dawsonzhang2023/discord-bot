@@ -26,6 +26,4 @@ module.exports = async (action, openai) => {
   //action.deferReply(`${gptReply.data.choices[0].text}`);
   // action.editReply(`${gptReply.data.choices[0].text}`);
   await action.followUp(`${gptReply.data.choices[0].text}`);
-
-  action.reply(prompt);
 };
