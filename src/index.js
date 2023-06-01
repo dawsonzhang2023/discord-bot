@@ -62,6 +62,14 @@ discordClient.on("interactionCreate", async (action) => {
     const wtwitter = require("./handlers/wtwitter");
     wtwitter(action, openAiClient);
   }
+  if (action.commandName == "w-tiktok-guide") {
+    const wtiktok = require("./handlers/wtiktok");
+    wtiktok(Client, action, openAiClient);
+  }
+  if (action.commandName == "w-ins-product") {
+    const winstagram = require("./handlers/winsgram");
+    winstagram(Client, action, openAiClient);
+  }
 });
 
 discordClient.login(process.env.KEY_API_TOKEN_RECORDS);
