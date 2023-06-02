@@ -16,14 +16,12 @@ module.exports = async (action, openai) => {
   const prompt = twitter_template(shareInfo, target, brand, experts);
 
   await action.deferReply(true);
-  let gptReply = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: `${prompt}`,
+  const messages = [{ role: "user", content: `${prompt}` }];
+  let gptReply = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
     temperature: 0.9,
     max_tokens: 500,
-    stop: ["ChatGPT"],
+    messages: messages,
   });
-  //action.deferReply(`${gptReply.data.choices[0].text}`);
-  // action.editReply(`${gptReply.data.choices[0].text}`);
-  await action.followUp(`${gptReply.data.choices[0].text}`);
+  await action.followUp(`${gptReply.data.choices[0].message.content}`);
 };

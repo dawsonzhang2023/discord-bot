@@ -1,7 +1,7 @@
 // dotenv
 require("dotenv").config();
 
-console.log(process.env.KEY_API_TOKEN_RECORDS);
+//console.log(process.env.KEY_API_TOKEN_RECORDS);
 //console.log( process.env.CHAT_GPT_ORGID)
 //console.log( process.env.KEY_CHAT_GPT_ORGID)
 
