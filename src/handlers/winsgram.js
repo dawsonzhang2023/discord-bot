@@ -28,14 +28,14 @@ module.exports = async (client, interaction, openai) => {
   if (prompt != null) {
     try {
       await interaction.deferReply();
-      let gptReply = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `${prompt}`,
+      const messages = [{ role: "user", content: `${prompt}` }];
+      let gptReply = await openai.createChatCompletion({
+        model: "gpt-3.5-turbo",
         temperature: 0.9,
         max_tokens: 500,
-        stop: ["ChatGPT"],
+        messages: messages,
       });
-      await interaction.followUp(`${gptReply.data.choices[0].text}`);
+      await interaction.followUp(`${gptReply.data.choices[0].message.content}`);
     } catch (error) {
       console.error(error);
     }
