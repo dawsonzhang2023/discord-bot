@@ -6,10 +6,10 @@ const twitter_template = require("../templates/twitter-t");
  */
 
 module.exports = async (action, openai) => {
-  const shareInfo = action.options.get("share_information").value;
-  const target = action.options.get("target").value;
-  const brand = action.options.get("brand").value;
-  const experts = action.options.get("experts").value;
+  const shareInfo = action.options.get("share_information")?.value;
+  const target = action.options.get("target")?.value;
+  const brand = action.options.get("brand")?.value;
+  const experts = action.options.get("experts")?.value;
 
   console.log(`user input ${shareInfo} ,  ${target} ,  ${brand} , ${experts} `);
 
