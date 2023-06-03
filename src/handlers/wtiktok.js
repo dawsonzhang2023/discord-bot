@@ -13,10 +13,10 @@ module.exports = async (client, interaction, openai) => {
     const templateGuide = require("../templates/tiktok/tiktok-guide");
 
     // options  keyword, checkpoint, target, product
-    const keyword = interaction.options.get("keyword").value;
-    const checkpoint = interaction.options.get("checkpoint").value;
-    const target = interaction.options.get("target").value;
-    const product = interaction.options.get("product").value;
+    const keyword = interaction.options.get("keyword")?.value;
+    const checkpoint = interaction.options.get("checkpoint")?.value;
+    const target = interaction.options.get("target")?.value;
+    const product = interaction.options.get("product")?.value;
 
     console.log(
       ` w-tiktok-guide user input : ${keyword} ,  ${checkpoint} ,  ${target} , ${product}`
