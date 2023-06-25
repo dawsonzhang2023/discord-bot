@@ -38,6 +38,12 @@ discordClient.on("messageCreate", async (message) => {
 discordClient.on("interactionCreate", async (action) => {
   //console.log(action)
   if (!action.isChatInputCommand) return;
+
+  if (action.commandName == "top-up") {
+    const topUp = require("./componments/topup");
+    topUp.execute(action);
+  }
+
   if (action.commandName == "chat") {
     //action.reply('chat with gpt')
     const prompt = action.options.get("prompt").value;
@@ -72,5 +78,5 @@ discordClient.on("interactionCreate", async (action) => {
   }
 });
 
-discordClient.login(process.env.KEY_API_TOKEN_RECORDS);
+discordClient.login(process.env.DISCORDS_BOT_APP_TOKEN);
 console.log("ChatGPT bot is Online");
