@@ -3,6 +3,10 @@ const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
 const commands = [
   {
+    name: "topup",
+    description: "payment",
+  },
+  {
     name: "chatgpt",
     description: "chat with openai",
     options: [

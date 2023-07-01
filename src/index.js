@@ -1,6 +1,6 @@
 // dotenv
 require("dotenv").config();
-
+const { mongoose } = require("mongoose");
 //console.log(process.env.KEY_API_TOKEN_RECORDS);
 //console.log( process.env.CHAT_GPT_ORGID)
 //console.log( process.env.KEY_CHAT_GPT_ORGID)
@@ -35,34 +35,30 @@ discordClient.on("messageCreate", async (message) => {
   }
 });
 
+// start open mongodb
+(async () => {
+  try {
+    mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.MONGODB_CONNECTION, { keepAlive: true });
+    console.log("mongo connected");
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+})();
+
 discordClient.on("interactionCreate", async (action) => {
   //console.log(action)
   if (!action.isChatInputCommand) return;
 
-  if (action.commandName == "top-up") {
+  if (action.commandName == "topup") {
     const topUp = require("./componments/topup");
     topUp.execute(action);
   }
 
-  if (action.commandName == "chat") {
-    //action.reply('chat with gpt')
-    const prompt = action.options.get("prompt").value;
-    action.reply(`echo ${prompt}`);
-  }
   if (action.commandName == "chatgpt") {
     //action.reply('chat with gpt')
-    const prompt = action.options.get("prompt").value;
-    await action.deferReply(true);
-    let gptReply = await openAiClient.createCompletion({
-      model: "text-davinci-003",
-      prompt: `${prompt}`,
-      temperature: 0.9,
-      max_tokens: 500,
-      stop: ["ChatGPT"],
-    });
-    //action.deferReply(`${gptReply.data.choices[0].text}`);
-    // action.editReply(`${gptReply.data.choices[0].text}`);
-    await action.followUp(`${gptReply.data.choices[0].text}`);
+    const chatGpt = require("./handlers/chatGptHandler");
+    chatGpt(Client, action, openAiClient);
   }
   if (action.commandName == "w-twitter") {
     const wtwitter = require("./handlers/wtwitter");

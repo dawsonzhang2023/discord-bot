@@ -20,7 +20,9 @@ module.exports = {
     console.log("top up userId :: " + userId);
 
     const paymentLink = new ButtonBuilder()
-      .setURL(`https://daojiemarketing.activehosted.com/f/25/${userId}`)
+      .setURL(
+        `https://daojiemarketing.thrivecart.com/test-7-bot/?passthrough[custom_discord_userid]=${userId}`
+      )
       .setLabel("buy")
       .setStyle(ButtonStyle.Link);
 

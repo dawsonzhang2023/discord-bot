@@ -1,15 +1,13 @@
 const { Schema, model } = require("mongoose");
 
-const userLogSchema = new Schema({
-  userLogId: String,
-  userId: String,
-  transactionId: String,
-  useAmt: Number,
-  currentBalance: Number,
-  privousBalance: Number,
-  templateName: String,
-  inputParams: String,
-  resultContent: String,
-});
+const userLogSchema = new Schema(
+  {
+    userId: String,
+    userInput: String,
+    templateName: String,
+    dateCode: String,
+  },
+  { timestamps: true }
+);
 
 module.exports = model("UserLog", userLogSchema);

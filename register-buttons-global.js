@@ -3,7 +3,7 @@ const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
 const commands = [
   {
-    name: "top-up",
+    name: "topup",
     description: "payment",
   },
 ];
