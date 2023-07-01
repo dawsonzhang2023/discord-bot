@@ -1,5 +1,8 @@
 const { Client, Interaction } = require("discord.js");
 const { OpenAIApi } = require("openai");
+
+const userLog = require("../models/userLog");
+const dateUtil = require("../utils/dateUtil");
 /**
  * W-Tiktok
  * @param { Client } client
@@ -9,6 +12,7 @@ const { OpenAIApi } = require("openai");
 module.exports = async (client, interaction, openai) => {
   const commandName = interaction.commandName;
   let prompt = null;
+  let paramInput = null;
   if (commandName == "w-tiktok-guide") {
     const templateGuide = require("../templates/tiktok/tiktok-guide");
 
@@ -22,6 +26,7 @@ module.exports = async (client, interaction, openai) => {
       ` w-tiktok-guide user input : ${keyword} ,  ${checkpoint} ,  ${target} , ${product}`
     );
 
+    paramInput = `${keyword} ,  ${checkpoint} ,  ${target} , ${product}`;
     prompt = templateGuide(keyword, checkpoint, target, product);
   }
   console.log(`w-tiktok-guide prompt :: ${prompt}`);
@@ -34,6 +39,14 @@ module.exports = async (client, interaction, openai) => {
         temperature: 0.9,
         max_tokens: 500,
         messages: messages,
+      });
+      const userId = interaction.user.id;
+      const dateCode = dateUtil.getCurrentDateCode();
+      userLog.create({
+        userId: userId,
+        userInput: paramInput,
+        templateName: "w-tiktok-guide",
+        dateCode: dateCode,
       });
       await interaction.followUp(`${gptReply.data.choices[0].message.content}`);
     } catch (error) {

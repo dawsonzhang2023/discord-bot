@@ -3,6 +3,10 @@ const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
 const commands = [
   {
+    name: "topup",
+    description: "payment",
+  },
+  {
     name: "chatgpt",
     description: "chat with openai",
     options: [
@@ -107,7 +111,7 @@ const commands = [
 ];
 
 const rest = new REST({ version: 10 }).setToken(
-  process.env.KEY_API_TOKEN_RECORDS
+  process.env.DISCORDS_BOT_APP_TOKEN
 );
 
 // and deploy your commands!
@@ -119,7 +123,9 @@ const rest = new REST({ version: 10 }).setToken(
 
     // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(
-      Routes.applicationCommands(process.env.Client_ID, { body: commands }),
+      Routes.applicationCommands(process.env.DISCORDS_BOT_APP_ID, {
+        body: commands,
+      }),
       //Routes.applicationGuildCommands(process.env.Client_ID, process.env.BOT_APP_ID),
       { body: commands }
     );

@@ -1,5 +1,8 @@
 const { Client, Interaction } = require("discord.js");
 const { OpenAIApi } = require("openai");
+
+const userLog = require("../models/userLog");
+const dateUtil = require("../utils/dateUtil");
 /**
  * W-Instagram
  * @param { Client } client
@@ -9,6 +12,8 @@ const { OpenAIApi } = require("openai");
 module.exports = async (client, interaction, openai) => {
   const commandName = interaction.commandName;
   let prompt = null;
+  let paramInput = null;
+
   if (commandName == "w-ins-product") {
     const templateGuide = require("../templates/instgram/ins-product");
 
@@ -17,6 +22,8 @@ module.exports = async (client, interaction, openai) => {
     const checkpoint = interaction.options.get("checkpoint")?.value;
     const target = interaction.options.get("target")?.value;
     const product = interaction.options.get("product")?.value;
+
+    paramInput = `${keyword} ,  ${checkpoint} ,  ${target} , ${product}`;
 
     console.log(
       ` w-ins-product user input : ${keyword} ,  ${checkpoint} ,  ${target} , ${product}`
@@ -34,6 +41,14 @@ module.exports = async (client, interaction, openai) => {
         temperature: 0.9,
         max_tokens: 500,
         messages: messages,
+      });
+      const userId = interaction.user.id;
+      const dateCode = dateUtil.getCurrentDateCode();
+      userLog.create({
+        userId: userId,
+        userInput: paramInput,
+        templateName: "w-ins-product",
+        dateCode: dateCode,
       });
       await interaction.followUp(`${gptReply.data.choices[0].message.content}`);
     } catch (error) {
