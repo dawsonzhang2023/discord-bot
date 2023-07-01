@@ -50,12 +50,12 @@ module.exports = async (interaction) => {
     });
 
     if (userLogs && userLogs.length >= maxlimit) {
-      return "over daily usage";
+      return { isOk: false, errMsg: `over daily usage number ${maxlimit}` };
     } else {
-      return "ok";
+      return { isOk: true };
     }
   } else {
-    console.log("return no subscribe");
-    return "no subscribe";
+    console.log("no subscribe");
+    return { isOk: false, errMsg: `no subscribe`, errCode: "no_subscribe" };
   }
 };

@@ -1,4 +1,7 @@
 const twitter_template = require("../templates/twitter-t");
+
+const userLog = require("../models/userLog");
+const dateUtil = require("../utils/dateUtil");
 /**
  *
  * @param {Interaction} action
@@ -14,7 +17,7 @@ module.exports = async (action, openai) => {
   console.log(`user input ${shareInfo} ,  ${target} ,  ${brand} , ${experts} `);
 
   const prompt = twitter_template(shareInfo, target, brand, experts);
-
+  let paramInput = `${shareInfo} ,  ${target} ,  ${brand} , ${experts}`;
   await action.deferReply(true);
   const messages = [{ role: "user", content: `${prompt}` }];
   let gptReply = await openai.createChatCompletion({
@@ -22,6 +25,14 @@ module.exports = async (action, openai) => {
     temperature: 0.9,
     max_tokens: 500,
     messages: messages,
+  });
+  const userId = interaction.user.id;
+  const dateCode = dateUtil.getCurrentDateCode();
+  userLog.create({
+    userId: userId,
+    userInput: paramInput,
+    templateName: "twitter",
+    dateCode: dateCode,
   });
   await action.followUp(`${gptReply.data.choices[0].message.content}`);
 };
