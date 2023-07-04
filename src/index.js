@@ -39,7 +39,7 @@ discordClient.on("interactionCreate", async (action) => {
   //console.log(action)
   if (!action.isChatInputCommand) return;
 
-  if (action.commandName == "topup") {
+  if (action.commandName == "service") {
     topUp.execute(action);
   } else {
     const balanceCheck = require("./billing/balanceCheck");

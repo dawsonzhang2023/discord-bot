@@ -23,13 +23,24 @@ module.exports = {
       .setURL(
         `https://daojiemarketing.thrivecart.com/test-7-bot/?passthrough[custom_discord_userid]=${userId}`
       )
-      .setLabel("buy")
+      .setLabel("每日5条订阅")
       .setStyle(ButtonStyle.Link);
 
-    const row = new ActionRowBuilder().addComponents(paymentLink);
+    // https://daojiemarketing.activehosted.com/f/25?discord_ID=<975859028154535976 这个是变量是用户的ID >
+    const signOffLink = new ButtonBuilder()
+      .setURL(
+        `https://daojiemarketing.activehosted.com/f/25?discord_ID=${userId}`
+      )
+      .setLabel("签到")
+      .setStyle(ButtonStyle.Link);
+
+    const row = new ActionRowBuilder().addComponents([
+      signOffLink,
+      paymentLink,
+    ]);
 
     await interaction.reply({
-      content: `make a payment`,
+      content: `客户服务`,
       components: [row],
     });
   },
@@ -43,7 +54,7 @@ module.exports = {
       .setURL(
         `https://daojiemarketing.thrivecart.com/test-7-bot/?passthrough[custom_discord_userid]=${userId}`
       )
-      .setLabel("buy")
+      .setLabel("每日5条订阅")
       .setStyle(ButtonStyle.Link);
 
     const row = new ActionRowBuilder().addComponents(paymentLink);
