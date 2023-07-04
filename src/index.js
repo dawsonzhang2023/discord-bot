@@ -24,18 +24,6 @@ const OpenAIConfig = new Configuration({
 
 const openAiClient = new OpenAIApi(OpenAIConfig);
 
-discordClient.on("messageCreate", async (message) => {
-  try {
-    if (message.author.bot) return;
-    var mentionUsers = message.mentions.users;
-    console.log(mentionUsers);
-    message.reply("this is a chat bot");
-    console.log(message.content);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 // start open mongodb
 (async () => {
   try {
