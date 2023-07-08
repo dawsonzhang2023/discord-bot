@@ -36,7 +36,6 @@ const openAiClient = new OpenAIApi(OpenAIConfig);
 })();
 
 discordClient.on("interactionCreate", async (action) => {
-  //console.log(action)
   if (!action.isChatInputCommand) return;
 
   if (action.commandName == "service") {
