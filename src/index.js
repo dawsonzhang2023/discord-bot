@@ -42,10 +42,18 @@ discordClient.on("interactionCreate", async (action) => {
     topUp.execute(action);
   } else {
     const balanceCheck = require("./billing/balanceCheck");
+    const { noChargeCheck } = require("./billing/NoChargeChannel");
     try {
-      const resultCheck = await balanceCheck(action);
+      let resultCheck = await noChargeCheck(action);
+      if (resultCheck && resultCheck.isOk) {
+        console.log(resultCheck);
+      } else {
+        resultCheck = await balanceCheck(action);
+      }
+      //const
       console.log(`balance check :: ${resultCheck}`);
       if (resultCheck.isOk) {
+        action.chargeType = resultCheck.chargeType;
         if (action.commandName == "chatgpt") {
           //action.reply('chat with gpt')
           const chatGpt = require("./handlers/chatGptHandler");

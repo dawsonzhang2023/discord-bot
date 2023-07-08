@@ -6,6 +6,7 @@ const userLogSchema = new Schema(
     userInput: String,
     templateName: String,
     dateCode: String,
+    chargeType: String,
   },
   { timestamps: true }
 );

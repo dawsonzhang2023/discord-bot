@@ -32,6 +32,7 @@ module.exports = async (client, interaction, openai) => {
       userInput: prompt,
       templateName: "ChatGpt",
       dateCode: dateCode,
+      chargeType: interaction.chargeType,
     });
     //console.log(gptReply.data.choices[0].text);
     console.log(gptReply.data.choices[0].message.content);

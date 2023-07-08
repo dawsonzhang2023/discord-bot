@@ -33,6 +33,7 @@ module.exports = async (action, openai) => {
     userInput: paramInput,
     templateName: "twitter",
     dateCode: dateCode,
+    chargeType: action.chargeType,
   });
   await action.followUp(`${gptReply.data.choices[0].message.content}`);
 };

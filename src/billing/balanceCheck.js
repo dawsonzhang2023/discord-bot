@@ -47,12 +47,13 @@ module.exports = async (interaction) => {
     const userLogs = await userLogRepository.find({
       userId: userId,
       dateCode: dateCode,
+      chargeType: "SUBSCRIBE",
     });
 
     if (userLogs && userLogs.length >= maxlimit) {
       return { isOk: false, errMsg: `over daily usage number ${maxlimit}` };
     } else {
-      return { isOk: true };
+      return { isOk: true, chargeType: "SUBSCRIBE" };
     }
   } else {
     console.log("no subscribe");

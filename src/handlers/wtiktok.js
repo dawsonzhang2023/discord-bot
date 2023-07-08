@@ -47,6 +47,7 @@ module.exports = async (client, interaction, openai) => {
         userInput: paramInput,
         templateName: "w-tiktok-guide",
         dateCode: dateCode,
+        chargeType: action.chargeType,
       });
       await interaction.followUp(`${gptReply.data.choices[0].message.content}`);
     } catch (error) {
