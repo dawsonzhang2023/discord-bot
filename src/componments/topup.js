@@ -21,7 +21,9 @@ module.exports = {
 
     // check if it is private session
     if (interaction.guildId && interaction.member) {
-      interaction.reply(`请与DAO-BOT 单独会话，确保你的客户服务的私密安全`);
+      interaction.reply(
+        `请与DAO-BOT 单独会话客户服务，确保你的客户服务的私密安全`
+      );
     } else {
       const paymentLink = new ButtonBuilder()
         .setURL(

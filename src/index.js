@@ -8,7 +8,7 @@ const topUp = require("./componments/topup");
 
 // authorize 2   https://discord.com/oauth2/authorize?client_id=1104811428281593897&scope=bot&permissions=1
 
-const { Client, GatewayIntentBits } = require("discord.js");
+const { Client, GatewayIntentBits, EmbedBuilder } = require("discord.js");
 const discordClient = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -36,7 +36,7 @@ const openAiClient = new OpenAIApi(OpenAIConfig);
 })();
 
 discordClient.on("interactionCreate", async (action) => {
-  //console.log(action)
+  console.log(action);
   if (!action.isChatInputCommand) return;
 
   if (action.commandName == "service") {
