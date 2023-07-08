@@ -16,8 +16,10 @@ module.exports = {
 
   async execute(interaction) {
     const userId = interaction.user.id;
-
-    console.log("top up userId :: " + userId);
+    const username = interaction.user.username;
+    console.log(
+      "top up userId :: " + userId + " customer service :: " + username
+    );
 
     // check if it is private session
     if (interaction.guildId && interaction.member) {
@@ -35,7 +37,7 @@ module.exports = {
       // https://daojiemarketing.activehosted.com/f/25?discord_ID=<975859028154535976 这个是变量是用户的ID >
       const signOffLink = new ButtonBuilder()
         .setURL(
-          `https://daojiemarketing.activehosted.com/f/25?discord_ID=${userId}`
+          `https://daojiemarketing.activehosted.com/f/25?discord_ID=${userId}&DISCORD_USER_NAME=${username}`
         )
         .setLabel("签到")
         .setStyle(ButtonStyle.Link);
@@ -67,7 +69,7 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(paymentLink);
 
     await interaction.reply({
-      content: `没有订阅任何产品，请完成一个订阅`,
+      content: `已经超过当日免费, 没有订阅任何产品，请完成一个订阅`,
       components: [row],
     });
   },
