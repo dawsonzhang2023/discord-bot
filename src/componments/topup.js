@@ -37,7 +37,7 @@ module.exports = {
       // https://daojiemarketing.activehosted.com/f/25?discord_ID=<975859028154535976 这个是变量是用户的ID >
       const signOffLink = new ButtonBuilder()
         .setURL(
-          `https://daojiemarketing.activehosted.com/f/25?discord_ID=${userId}&DISCORD_USER_NAME=${username}`
+          `https://daojiemarketing.activehosted.com/f/25?discord_ID=${userId}`
         )
         .setLabel("签到")
         .setStyle(ButtonStyle.Link);
