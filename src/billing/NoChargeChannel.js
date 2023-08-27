@@ -4,9 +4,17 @@ const userLogRepository = require("../models/userLog");
 /**
  *
  * @param {import("discord.js").Interaction} interaction
+ *
+ *
+ * 1101111146217476161
+ * 1105921066943127623
  */
 
-const noChargedChannels = ["1117607555234013254", "1111320055846797383"];
+const noChargedChannels = [
+  "1117607555234013254",
+  "1111320055846797383",
+  "1105921066943127623",
+];
 
 exports.noChargeCheck = async (interaction) => {
   if (
